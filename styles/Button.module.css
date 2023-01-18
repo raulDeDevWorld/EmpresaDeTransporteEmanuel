@@ -1,0 +1,46 @@
+.button {
+    cursor: pointer;
+    font-size: 14px;
+
+    width: 180px;
+    margin-top: 10px;
+    padding: 10px 1px;
+    border-radius: 5px;
+
+    transition-duration: .5s;
+}
+
+.buttonPrimary {
+    color: white;
+    background-color: #00B2BD;
+    border: 1px solid white;
+}
+
+.buttonPrimary:hover {
+    color: #003450;
+    background-color: white;
+    border: 1px solid #024164;
+}
+
+.buttonSecondary {
+    color: #024164;
+    background-color: #ffffff;
+    border: 1px solid #024164;
+}
+
+.buttonSecondary:hover {
+    color: white;
+    background-color: #00B2BD;
+    border: 1px solid white;
+}
+.buttonConfirm {
+    color: white;
+    background-color: #ff0000;
+    border: 1px solid white;
+}
+
+.buttonConfirm:hover {
+    color: #ff0000;
+    background-color: white;
+    border: 1px solid #ff0000;
+}
