@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { useUser } from '../context/Context.js'
 import { WithAuth } from '../HOCs/WithAuth'
 import Modal from '../components/Modal'
+import Button from '../components/Button'
+
 import Error from '../components/Error'
 import Navbar from '../components/Navbar'
 
@@ -18,6 +20,8 @@ function Users() {
     const { user, userDB, setUserData, setUserSuccess, success } = useUser()
     const [mode, setMode] = useState(false)
     const [itemSelect, setItemSelect] = useState('')
+    const [filter, setFilter] = useState('')
+
     const router = useRouter()
 
     function push(e) {
@@ -60,7 +64,10 @@ function Users() {
         writeUserData(`forms/${itemSelect}`, { state: true }, setUserSuccess)
         getData(`/`, setUserData)
     }
-
+    function handlerOnChange (e) {
+        // e.target.value
+        setFilter(e.target.value)
+    }
     function x() {
         setMode(null)
     }
@@ -68,7 +75,8 @@ function Users() {
         e.preventDefault()
         handleSignOut()
     }
-
+    
+    console.log(filter)
     // useEffect(() => {
     //    userDB && userDB.users[user.uid] !== 'Admin' && router.push('/Usuarios')
     // }, [userDB])
@@ -84,14 +92,18 @@ function Users() {
 
 
 
+                <input onChange={handlerOnChange} placeholder='Buscar Por Placa' />
+                {/* < Button style={filter ==}>  < Button /> */}
 
                 {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'Admin' &&
 
                     <ul className={style.list}>
 
-                        {Object.keys(userDB.forms).map((item, i) =>
+                        {Object.keys(userDB.forms).map((item, i) =>{
 
-                            <div className={style.items} key={i}>
+
+
+if (userDB.forms[item].placa.includes(filter)) { return <div className={style.items} key={i}>
                                 <Link href="validator/[User]" as={`validator/${item}`} >
                                     <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                 </Link>
@@ -101,7 +113,24 @@ function Users() {
                                         : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
                                     <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                                 </div>
+                            </div>}
+                            
+
+
+
+                            if (filter == '') {  return <div className={style.items} key={i}>
+                            <Link href="validator/[User]" as={`validator/${item}`} >
+                                <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
+                            </Link>
+                            <div>
+                                {userDB.forms[item].state == false
+                                    ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
+                                    : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
+                                <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                             </div>
+                        </div>}
+
+                        }
 
 
 

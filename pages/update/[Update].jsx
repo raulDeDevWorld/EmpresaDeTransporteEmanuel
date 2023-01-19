@@ -43,7 +43,7 @@ function AddUser() {
     useEffect(() => {
         const query = router.query.Update
         console.log(query)
-        getSpecificData(query, setUserSpecificData)
+        getSpecificData(`forms/${query}`, setUserSpecificData)
     }, [specificData]);
 
     return (
