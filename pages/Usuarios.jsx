@@ -110,7 +110,7 @@ function Users() {
                             </div>
                         </div>}
 
-
+ 
 
 if( filter == ''){return <div className={style.items} key={i}>
                             <Link href="validator/[User]" as={`validator/${item}`} >
