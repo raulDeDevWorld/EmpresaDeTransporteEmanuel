@@ -1,12 +1,17 @@
 .success {
     position: fixed;
     width: 100vw;
+    height: 60px;
     min-height: 21px;
     /* background-color: #1eff00; */
     background-color: black;
     color: #1eff00;
     display: inline-block;
     top: 0px;
+
+    display: flex;
+align-items: center;
+justify-content: center;
 
     text-align: center;
     transition-duration: .5s;
@@ -21,13 +26,17 @@
 .error {
     position: fixed;
     width: 100vw;
-    min-height: 21px;
+    height: 60px;
+
     /* background-color: red; */
     background-color: black;
     color: red;
     display: inline-block;
     top: 0px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 
     animation-name: animationRed;
@@ -81,4 +90,26 @@
         background-color: transparent;
         color: transparent
     }
+}
+
+
+
+
+@media (max-width: 850px) {
+
+    .success {
+        position: fixed;
+        width: 100vw;
+        height: 40px;
+    
+    
+    }
+    
+    .error {
+        position: fixed;
+        width: 100vw;
+        height: 40px;
+    
+    }
+
 }

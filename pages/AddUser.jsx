@@ -46,7 +46,8 @@ function AddUser() {
             sustancia: e.target.form[15].value,
             id: e.target.form[16].value,
             autorizadoPor: e.target.form[17].value,
-            state: true
+            state: true,
+            date: new Date()
         }
         writeUserData(`/forms/${object.id}`, object, setUserSuccess)
         writeUserData(`users/${user.uid}/forms`, { [object.id]: true}, setUserSuccess)

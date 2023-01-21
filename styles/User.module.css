@@ -1,6 +1,8 @@
 .container {
     box-sizing: border-box;
-    min-width: 560px;
+    min-height: 100vh;
+    min-width: 630px;
+
 }
 
 .box {
