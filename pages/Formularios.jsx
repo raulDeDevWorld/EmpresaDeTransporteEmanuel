@@ -135,7 +135,7 @@ if (userDB.forms[item].placa.includes(filter)) { return <div className={style.it
                                 <Link href="validator/[User]" as={`validator/${item}`} >
                                     <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                 </Link>
-                                <span>{item.date}</span>
+                                <span>{userDB.forms[item].placa}</span>
                                 <div>
                                     {userDB.forms[item].state == false
                                         ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
