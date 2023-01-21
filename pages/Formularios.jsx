@@ -125,7 +125,7 @@ console.log(forms)
 
 
 
-
+    
 
 
 
@@ -135,8 +135,6 @@ if (userDB.forms[item].placa.includes(filter)) { return <div className={style.it
                                 <Link href="validator/[User]" as={`validator/${item}`} >
                                     <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                 </Link>
-
-                                <p className={style.rol}>{userDB.forms[item].state}</p>
 
                                 <div>
 
@@ -156,7 +154,6 @@ if (userDB.forms[item].placa.includes(filter)) { return <div className={style.it
                             </Link>
 
 
-                            <p>{userDB.forms[item].state}hfhfhgf</p>
 
                             <div>
                                 {userDB.forms[item].state == false
