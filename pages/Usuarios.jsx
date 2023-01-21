@@ -103,8 +103,9 @@ function Users() {
                             <Link href="validator/[User]" as={`validator/${item}`} >
                                 <a className={style.link}>{userDB.users[item].email}</a>
                             </Link>
-                            <span>{userDB.users[item].rol}</span>
-                            <div>
+                            <div className={style.items}>
+                            <span className={style.rol}>{userDB.users[item].rol}</span>
+
                                 <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
                                 <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                             </div>
@@ -116,8 +117,9 @@ if( filter == ''){return <div className={style.items} key={i}>
                             <Link href="validator/[User]" as={`validator/${item}`} >
                                 <a className={style.link}>{userDB.users[item].email}</a>
                             </Link>
-                            <span>{userDB.users[item].rol}</span>
-                            <div>
+                            <div className={style.items}>
+                            <span className={style.rol}>{userDB.users[item].rol}</span>
+
                                 <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
                                 <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                             </div>

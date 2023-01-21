@@ -135,8 +135,11 @@ if (userDB.forms[item].placa.includes(filter)) { return <div className={style.it
                                 <Link href="validator/[User]" as={`validator/${item}`} >
                                     <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                 </Link>
-                                <span>{userDB.forms[item].placa}</span>
+
+                                <p className={style.rol}>{userDB.forms[item].state}</p>
+
                                 <div>
+
                                     {userDB.forms[item].state == false
                                         ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
                                         : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -151,7 +154,10 @@ if (userDB.forms[item].placa.includes(filter)) { return <div className={style.it
                             <Link href="validator/[User]" as={`validator/${item}`} >
                                 <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                             </Link>
-                            <span>{userDB.forms[item].date}</span>
+
+
+                            <p>{userDB.forms[item].state}hfhfhgf</p>
+
                             <div>
                                 {userDB.forms[item].state == false
                                     ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
