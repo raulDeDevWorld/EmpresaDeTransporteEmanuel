@@ -31,9 +31,9 @@ function Users() {
     function push(e) {
         e.preventDefault()
 
-        if (userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'N/A' ) {
+        if (userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'N/A') {
             setUserSuccess('N/A')
-            return 
+            return
         }
         router.push('/AddUser')
     }
@@ -47,21 +47,21 @@ function Users() {
     function removeConfirm() {
         console.log(userDB.forms[itemSelect].state == true);
 
-       if ( userDB.forms[itemSelect].state == true ) {
+        if (userDB.forms[itemSelect].state == true) {
 
-        // writeUserData(`users/${user.uid}/forms`, { [itemSelect]: false }, setUserSuccess)
-        writeUserData(`forms/${itemSelect}`, { state: false }, setUserSuccess)
-        getData(`/`, setUserData)
-        console.log('pape');
+            // writeUserData(`users/${user.uid}/forms`, { [itemSelect]: false }, setUserSuccess)
+            writeUserData(`forms/${itemSelect}`, { state: false }, setUserSuccess)
+            getData(`/`, setUserData)
+            console.log('pape');
 
-        return
-       }
-       if ( userDB && userDB.users[user.uid].rol == 'Admin' && userDB.forms[itemSelect].state == false ) {
-        removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
-        removeData(`forms/${itemSelect}`, setUserData, setUserSuccess)
-        console.log('eli');
-        getData(`/`, setUserData)
-      }
+            return
+        }
+        if (userDB && userDB.users[user.uid].rol == 'Admin' && userDB.forms[itemSelect].state == false) {
+            removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
+            removeData(`forms/${itemSelect}`, setUserData, setUserSuccess)
+            console.log('eli');
+            getData(`/`, setUserData)
+        }
     }
 
     function papelera(item) {
@@ -73,7 +73,7 @@ function Users() {
         writeUserData(`forms/${itemSelect}`, { state: true }, setUserSuccess)
         getData(`/`, setUserData)
     }
-    function handlerOnChange (e) {
+    function handlerOnChange(e) {
         // e.target.value
         setFilter(e.target.value)
     }
@@ -84,10 +84,10 @@ function Users() {
         e.preventDefault()
         handleSignOut()
     }
-    function handlerFilterInput (e, data) {
+    function handlerFilterInput(e, data) {
         setFilterInput(data)
 
-        if(data == 'Fecha') {
+        if (data == 'Fecha') {
             userDB.forms && setForms(Object.values(userDB.forms).sort((a, b) => new Date(b.date) - new Date(a.date)))
         }
 
@@ -97,11 +97,11 @@ function Users() {
 
 
 
-// useEffect(() => {
+    // useEffect(() => {
 
-// }, [] );  
+    // }, [] );  
 
-console.log(forms)
+    console.log(forms)
     return (
         <div className={style.container}>
             <Navbar></Navbar>
@@ -116,131 +116,86 @@ console.log(forms)
                 <input onChange={handlerOnChange} placeholder='Buscar Por Placa' />
                 {/* < Button style={filter ==}>  < Button /> */}
 
-                <Button style={filterInput == 'Fecha'?'buttonPrimary':'buttonSecondary'} click={(e)=>handlerFilterInput(e, 'Fecha')}>Fecha</Button>
-<Button style={filterInput == 'Alfabetico'?'buttonPrimary':'buttonSecondary'} click={(e)=>handlerFilterInput(e, 'Alfabetico')}>Alfabetico</Button>
+                <Button style={filterInput == 'Fecha' ? 'buttonPrimary' : 'buttonSecondary'} click={(e) => handlerFilterInput(e, 'Fecha')}>Fecha</Button>
+                <Button style={filterInput == 'Alfabetico' ? 'buttonPrimary' : 'buttonSecondary'} click={(e) => handlerFilterInput(e, 'Alfabetico')}>Alfabetico</Button>
 
                 {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'Admin' &&
 
                     <ul className={style.list}>
 
+                        {filterInput == 'Alfabetico' && userDB.forms && Object.keys(userDB.forms).map((item, i) => {
 
-
-    
-
-
-
-                        {filterInput == 'Alfabetico' && userDB.forms && Object.keys(userDB.forms).map((item, i) =>{
-
-if (userDB.forms[item].placa.includes(filter)) { return <div className={style.items} key={i}>
-                                <Link href="validator/[User]" as={`validator/${item}`} >
-                                    <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
-                                </Link>
-
-                                <div>
-
-                                    {userDB.forms[item].state == false
-                                        ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
-                                        : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
-                                    <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                            if (userDB.forms[item].placa.includes(filter)) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item}`} >
+                                        <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                    <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item].date).getMonth() + 1 }`: new Date(userDB.forms[item].date).getMonth() + 1 }</span>
+                                        {userDB.forms[item].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                    </div>
                                 </div>
-                            </div>}
-                            
+                            }
 
+                            if (filter == '') {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item}`} >
+                                        <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
+                                    </Link>
 
+                                    <div className={style.items}>
+                                    <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item.id].date).getMonth() + 1 }`: new Date(userDB.forms[item.id].date).getMonth() + 1 }</span>
+                                        {userDB.forms[item].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                    </div>
+                                </div>
+                            }
 
-                            if (filter == '') {  return <div className={style.items} key={i}>
-                            <Link href="validator/[User]" as={`validator/${item}`} >
-                                <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
-                            </Link>
-
-
-
-                            <div>
-                                {userDB.forms[item].state == false
-                                    ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
-                                    : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
-                                <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
-                            </div>
-                        </div>}
-
-                        }          
+                        }
                         )}
 
 
+                        {filterInput == 'Fecha' && forms.length > 0 && forms.map((item, i) => {
 
-
-
-
-
-
-
-
-{filterInput == 'Fecha' && forms.length > 0 && forms.map((item, i) =>{
-
-if (userDB.forms[item.id].placa.includes(filter)) { return <div className={style.items} key={i}>
-                                <Link href="validator/[User]" as={`validator/${item.id}`} >
-                                    <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
-                                </Link>
-                                <div>
-                                    {userDB.forms[item.id].state == false
-                                        ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
-                                        : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
-                                    <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                            if (userDB.forms[item.id].placa.includes(filter)) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item.id}`} >
+                                        <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                    <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item.id].date).getMonth() + 1 }`: new Date(userDB.forms[item.id].date).getMonth() + 1 }</span>
+                                        {userDB.forms[item.id].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                                    </div>
                                 </div>
-                            </div>}
-                            
+                            }
 
 
-
-                            if (filter == '') {  return <div className={style.items} key={i}>
-                            <Link href="validator/[User]" as={`validator/${item.id}`} >
-                                <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
-                            </Link>
-                            <span>{item.date}</span>
-                            <div>
-                                {userDB.forms[item.id].state == false
-                                    ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
-                                    : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
-                                <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
-                            </div>
-                        </div>}
-
-                        } 
-                        
-                        
-                        
-                        )} 
-
+                            if (filter == '') {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item.id}`} >
+                                        <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                    <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item.id].date).getMonth() + 1 }`: new Date(userDB.forms[item.id].date).getMonth() + 1 }</span>
+                                        {userDB.forms[item.id].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                                    </div>
+                                </div>
+                            }
+                        }
+                        )}
                     </ul>
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'AdminSec' &&
 
@@ -253,7 +208,8 @@ if (userDB.forms[item.id].placa.includes(filter)) { return <div className={style
                                     <Link href="validator/[User]" as={`validator/${item}`} >
                                         <a className={style.link}>{item}</a>
                                     </Link>
-                                    <div>
+                                    <div className={style.items}>
+                                    <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item].date).getMonth() + 1 }`: new Date(userDB.forms[item].date).getMonth() + 1 }</span>
                                         <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
                                         <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                                     </div>
