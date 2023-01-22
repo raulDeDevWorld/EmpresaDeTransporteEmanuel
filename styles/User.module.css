@@ -2,7 +2,6 @@
     box-sizing: border-box;
     min-height: 100vh;
     min-width: 630px;
-
 }
 
 .box {
@@ -51,3 +50,4 @@
         box-sizing: border-box;
     }
 }
+
