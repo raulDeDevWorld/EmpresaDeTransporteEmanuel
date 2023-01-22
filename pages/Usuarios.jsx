@@ -1,4 +1,4 @@
-import { handleSignOut, getData, removeData, writeUserData} from '../firebase/utils'
+import { handleSignOut, getData, removeData, writeUserData } from '../firebase/utils'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -38,21 +38,21 @@ function Users() {
     function removeConfirm() {
         console.log(userDB.forms[itemSelect].state == true);
 
-       if ( userDB.forms[itemSelect].state == true ) {
+        if (userDB.forms[itemSelect].state == true) {
 
-        // writeUserData(`users/${user.uid}/forms`, { [itemSelect]: false }, setUserSuccess)
-        writeUserData(`forms/${itemSelect}`, { state: false }, setUserSuccess)
-        getData(`/`, setUserData)
-        console.log('pape');
+            // writeUserData(`users/${user.uid}/forms`, { [itemSelect]: false }, setUserSuccess)
+            writeUserData(`forms/${itemSelect}`, { state: false }, setUserSuccess)
+            getData(`/`, setUserData)
+            console.log('pape');
 
-        return
-       }
-       if ( userDB && userDB.users[user.uid].rol == 'Admin' && userDB.forms[itemSelect].state == false ) {
-        removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
-        removeData(`forms/${itemSelect}`, setUserData, setUserSuccess)
-        console.log('eli');
-        getData(`/`, setUserData)
-      }
+            return
+        }
+        if (userDB && userDB.users[user.uid].rol == 'Admin' && userDB.forms[itemSelect].state == false) {
+            removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
+            removeData(`forms/${itemSelect}`, setUserData, setUserSuccess)
+            console.log('eli');
+            getData(`/`, setUserData)
+        }
     }
 
     function edit(item) {
@@ -76,55 +76,55 @@ function Users() {
         handleSignOut()
     }
     console.log(rol)
-    function handlerOnChange (e) {
+    function handlerOnChange(e) {
         // e.target.value
         setFilter(e.target.value)
     }
     useEffect(() => {
         userDB && userDB.users[user.uid].rol !== 'Admin' && router.push('/Formularios')
-     }, [userDB])
+    }, [userDB])
 
     return (
         <div className={style.container}>
             <Navbar></Navbar>
 
-            <main className={style.main}>
+{  userDB && userDB.users[user.uid].rol == 'Admin' &&          <main className={style.main}>
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Admin{router.pathname}</h4>
-                <input onChange={handlerOnChange} placeholder='Buscar Por Email' />
+                <input className={style.filter} onChange={handlerOnChange} placeholder='Buscar Por Email' />
                 {userDB && <ul className={style.list}>
-                    {Object.keys(userDB.users).map((item, i) =>
-                        
-                        
-                        
-                     {   
-                        if(userDB.users[item].email.includes(filter)){return <div className={style.items} key={i}>
-                            <Link href="validator/[User]" as={`validator/${item}`} >
-                                <a className={style.link}>{userDB.users[item].email}</a>
-                            </Link>
-                            <div className={style.items}>
-                            <span className={style.rol}>{userDB.users[item].rol}</span>
+                    {Object.keys(userDB.users).map((item, i) => {
+                        if (userDB.users[item].email.includes(filter)) {
+                            return <div className={style.items} key={i}>
+                                <Link href="validator/[User]" as={`validator/${item}`} >
+                                    <a className={style.link}>{userDB.users[item].email}</a>
+                                </Link>
+                                <div className={style.items}>
+                                    <span className={style.rol}>{userDB.users[item].rol}</span>
 
-                                <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
-                                <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                    <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
+                                    <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                </div>
                             </div>
-                        </div>}
+                        }
 
- 
 
-if( filter == ''){return <div className={style.items} key={i}>
-                            <Link href="validator/[User]" as={`validator/${item}`} >
-                                <a className={style.link}>{userDB.users[item].email}</a>
-                            </Link>
-                            <div className={style.items}>
-                            <span className={style.rol}>{userDB.users[item].rol}</span>
 
-                                <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
-                                <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                        if (filter == '') {
+                            return <div className={style.items} key={i}>
+                                <Link href="validator/[User]" as={`validator/${item}`} >
+                                    <a className={style.link}>{userDB.users[item].email}</a>
+                                </Link>
+                                <div className={style.items}>
+                                    <span className={style.rol}>{userDB.users[item].rol}</span>
+
+                                    <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
+                                    <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                </div>
                             </div>
-                        </div>}
-}
+                        }
+                    }
 
 
                     )}
@@ -134,16 +134,16 @@ if( filter == ''){return <div className={style.items} key={i}>
                 <button>+</button>
                 <button>Users</button>
                 <button className={style.add} onClick={push}>Añadir</button> */}
-            </main>
-{   itemSelect !== '' &&  mode == 'remove' &&        <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${userDB.users[itemSelect].email}`}></Modal>}
-{   itemSelect !== '' &&  mode == 'edit' &&        <Modal mode={mode} click={x} confirm={editConfirm} text={`Asignar un rol a: ${userDB.users[itemSelect].email}`}>
-<Button style={rol == 'N/A'?'buttonPrimary':'buttonSecondary'} click={()=>editRol('N/A')}>N/A</Button>
-<Button style={rol == 'Admin'?'buttonPrimary':'buttonSecondary'} click={()=>editRol('Admin')}>Admin</Button>
-<Button style={rol == 'AdminSec'?'buttonPrimary':'buttonSecondary'} click={()=>editRol('AdminSec')}>Admin Sec</Button>
-    </Modal>}
-     
-           
-           
+            </main>}
+            {itemSelect !== '' && mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${userDB.users[itemSelect].email}`}></Modal>}
+            {itemSelect !== '' && mode == 'edit' && <Modal mode={mode} click={x} confirm={editConfirm} text={`Asignar un rol a: ${userDB.users[itemSelect].email}`}>
+                <Button style={rol == 'N/A' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('N/A')}>N/A</Button>
+                <Button style={rol == 'Admin' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('Admin')}>Admin</Button>
+                <Button style={rol == 'AdminSec' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('AdminSec')}>Admin Sec</Button>
+            </Modal>}
+
+
+
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
         </div>

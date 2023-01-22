@@ -94,13 +94,6 @@ function Users() {
     }
 
 
-
-
-
-    // useEffect(() => {
-
-    // }, [] );  
-
     console.log(forms)
     return (
         <div className={style.container}>
@@ -113,7 +106,7 @@ function Users() {
 
 
 
-                <input onChange={handlerOnChange} placeholder='Buscar Por Placa' />
+                <input className={style.filter} onChange={handlerOnChange} placeholder='Buscar Por Placa' />
                 {/* < Button style={filter ==}>  < Button /> */}
 
                 <Button style={filterInput == 'Fecha' ? 'buttonPrimary' : 'buttonSecondary'} click={(e) => handlerFilterInput(e, 'Fecha')}>Fecha</Button>
@@ -131,7 +124,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
-                                    <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item].date).getMonth() + 1 }`: new Date(userDB.forms[item].date).getMonth() + 1 }</span>
+                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -147,7 +140,7 @@ function Users() {
                                     </Link>
 
                                     <div className={style.items}>
-                                    <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item.id].date).getMonth() + 1 }`: new Date(userDB.forms[item.id].date).getMonth() + 1 }</span>
+                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -168,7 +161,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
                                     </Link>
                                     <div className={style.items}>
-                                    <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item.id].date).getMonth() + 1 }`: new Date(userDB.forms[item.id].date).getMonth() + 1 }</span>
+                                        <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item.id].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
@@ -184,7 +177,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
-                                    <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item.id].date).getMonth() + 1 }`: new Date(userDB.forms[item.id].date).getMonth() + 1 }</span>
+                                        <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item.id].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
@@ -209,7 +202,7 @@ function Users() {
                                         <a className={style.link}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
-                                    <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth()+1 < 10 ?  `0${new Date(userDB.forms[item].date).getMonth() + 1 }`: new Date(userDB.forms[item].date).getMonth() + 1 }</span>
+                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
                                         <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
                                         <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                                     </div>
