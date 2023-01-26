@@ -88,7 +88,7 @@ function Users() {
         <div className={style.container}>
             <Navbar></Navbar>
 
-{  userDB && userDB.users[user.uid].rol == 'Admin' &&          <main className={style.main}>
+            {userDB && userDB.users[user.uid].rol == 'Admin' && <main className={style.main}>
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Admin{router.pathname}</h4>
@@ -109,8 +109,6 @@ function Users() {
                             </div>
                         }
 
-
-
                         if (filter == '') {
                             return <div className={style.items} key={i}>
                                 <Link href="validator/[User]" as={`validator/${item}`} >
@@ -118,36 +116,24 @@ function Users() {
                                 </Link>
                                 <div className={style.items}>
                                     <span className={style.rol}>{userDB.users[item].rol}</span>
-
                                     <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
                                     <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                                 </div>
                             </div>
                         }
                     }
-
-
                     )}
                 </ul>}
-
-                {/* <button className={style.logout} onClick={signOut}>Cerrar Sesión</button>
-                <button>+</button>
-                <button>Users</button>
-                <button className={style.add} onClick={push}>Añadir</button> */}
             </main>}
             {itemSelect !== '' && mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${userDB.users[itemSelect].email}`}></Modal>}
             {itemSelect !== '' && mode == 'edit' && <Modal mode={mode} click={x} confirm={editConfirm} text={`Asignar un rol a: ${userDB.users[itemSelect].email}`}>
                 <Button style={rol == 'N/A' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('N/A')}>N/A</Button>
                 <Button style={rol == 'Admin' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('Admin')}>Admin</Button>
-                <Button style={rol == 'AdminSec' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('AdminSec')}>Admin Sec</Button>
+                <Button style={rol == 'AdmSe' ? 'buttonPrimary' : 'buttonSecondary'} click={() => editRol('AdmSe')}>Admin Sec</Button>
             </Modal>}
-
-
-
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
         </div>
-
     )
 }
 

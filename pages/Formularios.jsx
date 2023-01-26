@@ -93,8 +93,6 @@ function Users() {
 
     }
 
-
-    console.log(forms)
     return (
         <div className={style.container}>
             <Navbar></Navbar>
@@ -104,21 +102,15 @@ function Users() {
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Admin{router.pathname}</h4>
 
-
-
                 <input className={style.filter} onChange={handlerOnChange} placeholder='Buscar Por Placa' />
-                {/* < Button style={filter ==}>  < Button /> */}
 
                 <Button style={filterInput == 'Fecha' ? 'buttonPrimary' : 'buttonSecondary'} click={(e) => handlerFilterInput(e, 'Fecha')}>Fecha</Button>
                 <Button style={filterInput == 'Alfabetico' ? 'buttonPrimary' : 'buttonSecondary'} click={(e) => handlerFilterInput(e, 'Alfabetico')}>Alfabetico</Button>
 
-                {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'Admin' &&
-
+                {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol === 'Admin' &&
                     <ul className={style.list}>
-
-                        {filterInput == 'Alfabetico' && userDB.forms && Object.keys(userDB.forms).map((item, i) => {
-
-                            if (userDB.forms[item].placa.includes(filter)) {
+                        {filterInput == 'Alfabetico' && userDB && userDB.forms && Object.keys(userDB.forms).map((item, i) => {
+                            if (userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa.includes(filter)) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item}`} >
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
@@ -132,8 +124,7 @@ function Users() {
                                     </div>
                                 </div>
                             }
-
-                            if (filter == '') {
+                            if (filter == '' && userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item}`} >
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
@@ -148,14 +139,14 @@ function Users() {
                                     </div>
                                 </div>
                             }
-
                         }
                         )}
 
 
                         {filterInput == 'Fecha' && forms.length > 0 && forms.map((item, i) => {
 
-                            if (userDB.forms[item.id].placa.includes(filter)) {
+
+                            if (userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa && userDB.forms[item.id].placa.includes(filter)) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item.id}`} >
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
@@ -171,7 +162,9 @@ function Users() {
                             }
 
 
-                            if (filter == '') {
+
+
+                            if (filter == '' && userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item.id}`} >
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
@@ -185,45 +178,211 @@ function Users() {
                                     </div>
                                 </div>
                             }
+
+
+
+
                         }
                         )}
+
+
+
+
                     </ul>
                 }
 
-                {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'AdminSec' &&
+                {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'AdmSe' &&
 
                     <ul className={style.list}>
 
-                        {userDB.users[user.uid].forms && Object.keys(userDB.users[user.uid].forms).map((item, i) => {
 
-                            return userDB.forms[item].state == true
-                                && <div className={style.items} key={i}>
+
+
+                        {filterInput == 'Alfabetico' && userDB.users && userDB.users[user.uid].forms && Object.keys(userDB.users[user.uid].forms).map((item, i) => {
+                            if (userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa.includes(filter)) {
+                                return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item}`} >
-                                        <a className={style.link}>{item}</a>
+                                        <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
                                         <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
-                                        <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
+                                        {userDB.forms[item].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
                                         <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                                     </div>
                                 </div>
+                            }
+                            if (filter == '' && userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item}`} >
+                                        <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
+                                    </Link>
+
+                                    <div className={style.items}>
+                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        {userDB.forms[item].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                    </div>
+                                </div>
+                            }
                         }
                         )}
+
+
+                        {filterInput == 'Fecha' && forms.length > 0 && forms.map((item, i) => {
+
+
+                            if (filter !== '' && userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa && userDB.users[user.uid].forms[item.id] && userDB.forms[item.id].placa.includes(filter)) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item.id}`} >
+                                        <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                        <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        {userDB.forms[item.id].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+                            if (filter == '' && userDB.users[user.uid].forms[item.id]) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item.id}`} >
+                                        <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                        <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        {userDB.forms[item.id].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+                        }
+                        )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {/* 
+
+                        {filterInput == 'Alfabetico' && userDB.users[user.uid].forms && Object.keys(userDB.users[user.uid].forms).map((item, i) => {
+
+
+                            if (userDB.forms && userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa.includes(filter)) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item}`} >
+                                        <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
+                                        {userDB.forms[item].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                    </div>
+                                </div>
+                            }
+
+                            if (filter == '' && userDB.forms && userDB.forms[item] && userDB.forms[item].placa) {
+
+                                return userDB.forms[item].state == true
+                                    && <div className={style.items} key={i}>
+                                        <Link href="validator/[User]" as={`validator/${item}`} >
+                                            <a className={style.link}>{item}</a>
+                                        </Link>
+                                        <div className={style.items}>
+                                            <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
+                                            <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
+                                            <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                                        </div>
+                                    </div>
+                            }
+                        }
+                        )}
+
+                        {filterInput == 'Fecha' && forms.length > 0 && forms.map((item, i) => {
+
+
+
+                            if (filter !== '' && userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa && userDB.forms[item.id].placa.includes(filter)) {
+                                return <div className={style.items} key={i}>
+                                    <Link href="validator/[User]" as={`validator/${item.id}`} >
+                                        <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
+                                    </Link>
+                                    <div className={style.items}>
+                                        <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        {userDB.forms[item.id].state == false
+                                            ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
+                                            : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
+                                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                                    </div>
+                                </div>
+                            }
+
+                            if (filter == '' && userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa && userDB.users[user.uid].forms && userDB.users[user.uid].forms.includes(item.id)) {
+
+                                return userDB.forms[item.id].state == true
+                                    && <div className={style.items} key={i}>
+                                        <Link href="validator/[User]" as={`validator/${item.id}`} >
+                                            <a className={style.link}>{item.id}</a>
+                                        </Link>
+                                        <div className={style.items}>.id
+                                            <span className={style.rol}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                            <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />
+                                            <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item.id)} />
+                                        </div>
+                                    </div>
+                            }
+
+                        }
+
+
+
+
+
+                        
+                        )} */}
+
+
+
+
+
+
+
+
                     </ul>
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 {userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'N/A' &&
@@ -235,11 +394,6 @@ function Users() {
                     </ul>
                 }
 
-
-
-                {/* <button className={style.logout} onClick={signOut}>Cerrar Sesión</button>
-                <button>+</button>
-                <button>Users</button>*/}
                 <button className={style.add} onClick={push}>+</button>
             </main>}
             {mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${itemSelect.toUpperCase()}`}></Modal>}

@@ -60,7 +60,7 @@ function withGoogle () {
     const user = result.user;
     // ...
 
-    writeUserData (object, setUserSuccess)
+    // writeUserData(`/users/${user.uid}`, {email: user.email, rol: 'N/A'}, null)
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;

@@ -11,8 +11,7 @@ import style from '../../styles/AddUser.module.css'
 
 function AddUser() {
 
-    const { userDB, setUserSuccess, success } = useUser()
-    const { specificData, setUserSpecificData } = useUser(null)
+    const {user, userDB, specificData, setUserSpecificData, setUserSuccess, success } = useUser()
     const router = useRouter()
 
     function save(e) {
@@ -36,14 +35,16 @@ function AddUser() {
             sustancia: e.target.form[15].value.length > 0 ? e.target.form[15].value : specificData.sustancia,
             id: e.target.form[16].value.length > 0 ? e.target.form[16].value : specificData.id,
             autorizadoPor: e.target.form[17].value.length > 0 ? e.target.form[17].value : specificData.autorizadoPor,
+            date: new Date()
+
         }
-        writeUserData(object, setUserSuccess)
+        writeUserData(`forms/${router.query.Update}`, object, setUserSuccess)
     }
 
     useEffect(() => {
-        const query = router.query.Update
-        console.log(query)
-        getSpecificData(`forms/${query}`, setUserSpecificData)
+        console.log('hello world')
+        let query = router.query.Update
+        userDB && setUserSpecificData(userDB.forms[query])
     }, [specificData]);
 
     return (
