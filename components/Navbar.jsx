@@ -32,11 +32,11 @@ export default function Navbar() {
                 <Button style='buttonSecondary' click={() => redirect('/Usuarios')}>
                     Usuarios
                 </Button>
-                <img src="/home.svg" className={style.icon} alt="power" onClick={() => redirect('/Usuarios')} />
+                <img src="/Users.svg" className={style.icon} alt="power" onClick={() => redirect('/Usuarios')} />
                 <Button style='buttonSecondary' click={() => redirect('/Formularios')}>
                     Formularios
                 </Button>
-                <img src="/Users.svg" className={style.icon} alt="power" onClick={() => redirect('/Formularios')} />
+                <img src="/home.svg" className={style.icon} alt="power" onClick={() => redirect('/Formularios')} />
             </>}
         <Button style='buttonSecondary' click={logout}>
             Cerrar Sesion

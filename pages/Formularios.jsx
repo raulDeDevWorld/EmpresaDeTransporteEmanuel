@@ -260,7 +260,7 @@ function Users() {
 
 
 
-                            if (filter == '' && userDB.users[user.uid].forms[item.id] && userDB.forms[item].state == true) {
+                            if (filter == '' && userDB.users[user.uid].forms[item.id]  && userDB.forms[item.id].state == true) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item.id}`} >
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
