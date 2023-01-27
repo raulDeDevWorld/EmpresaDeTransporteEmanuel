@@ -37,7 +37,7 @@ function Users() {
     }
     function removeConfirm() {
 
-     
+
         if (userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'Admin') {
             setItemSelect('')
             removeData(`users/${itemSelect}/`, setUserData, setUserSuccess)
@@ -74,19 +74,19 @@ function Users() {
         setFilter(e.target.value)
     }
     useEffect(() => {
-        userDB && userDB.users[user.uid].rol !== 'Admin' && router.push('/Formularios')
+        userDB && userDB.users[user.uid] && userDB.users[user.uid].rol !== 'Admin' && router.push('/Formularios')
     }, [userDB])
 
     return (
         <div className={style.container}>
             <Navbar></Navbar>
 
-            {userDB && userDB.users[user.uid].rol == 'Admin' && <main className={style.main}>
+            {userDB && userDB.users && <main className={style.main}>
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Admin{router.pathname}</h4>
                 <input className={style.filter} onChange={handlerOnChange} placeholder='Buscar Por Email' />
-                {userDB && <ul className={style.list}>
+                {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol == 'Admin' && <ul className={style.list}>
                     {Object.keys(userDB.users).map((item, i) => {
                         if (userDB.users[item].email.includes(filter) && user.uid !== item) {
                             return <div className={style.items} key={i}>
@@ -117,6 +117,14 @@ function Users() {
                     }
                     )}
                 </ul>}
+                {userDB && userDB.users[user.uid] == undefined &&
+
+                    <ul className={style.list}>
+                        NOTIFICACIÓN: <br />
+                        Estimado usuario su cuenta ha sido eliminada, contactese por favor con el administrador, GRACIAS...
+
+                    </ul>
+                }
             </main>}
             {itemSelect !== '' && mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${userDB.users[itemSelect].email}`}></Modal>}
             {itemSelect !== '' && mode == 'edit' && <Modal mode={mode} click={x} confirm={editConfirm} text={`Asignar un rol a: ${userDB.users[itemSelect].email}`}>

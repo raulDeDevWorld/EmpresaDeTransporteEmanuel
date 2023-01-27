@@ -35,8 +35,14 @@ function Users() {
             setUserSuccess('N/A')
             return
         }
+        if (userDB && userDB.users[user.uid] == undefined) {
+            setUserSuccess('Eliminado')
+            return
+        }
         router.push('/AddUser')
     }
+
+
     function edit(item) {
         router.push(`/update/${item}`)
     }
@@ -287,15 +293,25 @@ function Users() {
 
                     </ul>
                 }
+                {userDB && userDB.users[user.uid] == undefined &&
+
+                    <ul className={style.list}>
+                        NOTIFICACIÓN: <br />
+                        Estimado usuario su cuenta ha sido eliminada, contactese por favor con el administrador, GRACIAS...
+
+                    </ul>
+                }
 
                 <button className={style.add} onClick={push}>+</button>
             </main>}
             {mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${itemSelect.toUpperCase()}`}></Modal>}
             {mode == 'papelera' && <Modal mode={mode} click={x} confirm={papeleraConfirm} text={`Estas por restaurar a: ${itemSelect.toUpperCase()}`}></Modal>}
-            {mode == 'autor' && <Modal mode={mode} click={x} confirm={x} text={userDB.users[itemSelect] ? <span>Este formulario fue llenado por: <br />   userDB.users[itemSelect].email</span>: 'El usuario que creo este formulario ha sido Eliminado'}></Modal>}
+            {mode == 'autor' && <Modal mode={mode} click={x} confirm={x} text={userDB.users[itemSelect] ? <span>Este formulario fue llenado por: <br />   userDB.users[itemSelect].email</span> : 'El usuario que creo este formulario ha sido Eliminado'}></Modal>}
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
             {success == 'N/A' && <Error>Su Cuenta No Esta Verificada</Error>}
+            {success == 'Eliminado' && <Error>Su Cuenta ha sido eliminada</Error>}
+
 
         </div>
 
