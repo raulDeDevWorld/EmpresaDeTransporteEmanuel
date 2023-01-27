@@ -49,8 +49,6 @@ function Users() {
         console.log(userDB.forms[itemSelect].state == true);
 
         if (userDB.forms[itemSelect].state == true) {
-
-            // writeUserData(`users/${user.uid}/forms`, { [itemSelect]: false }, setUserSuccess)
             writeUserData(`forms/${itemSelect}`, { state: false }, setUserSuccess)
             getData(`/`, setUserData)
             console.log('pape');
