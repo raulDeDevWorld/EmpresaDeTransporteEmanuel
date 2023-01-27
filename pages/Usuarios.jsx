@@ -88,9 +88,9 @@ function Users() {
                 <input className={style.filter} onChange={handlerOnChange} placeholder='Buscar Por Email' />
                 {userDB && <ul className={style.list}>
                     {Object.keys(userDB.users).map((item, i) => {
-                        if (userDB.users[item].email.includes(filter)) {
+                        if (userDB.users[item].email.includes(filter) && user.uid !== item) {
                             return <div className={style.items} key={i}>
-                                <Link href="validator/[User]" as={`validator/${item}`} >
+                                <Link href="#" >
                                     <a className={style.link}>{userDB.users[item].email}</a>
                                 </Link>
                                 <div className={style.items}>
@@ -102,7 +102,7 @@ function Users() {
                             </div>
                         }
 
-                        if (filter == '') {
+                        if (filter == '' && user.uid !== item) {
                             return <div className={style.items} key={i}>
                                 <Link href="validator/[User]" as={`validator/${item}`} >
                                     <a className={style.link}>{userDB.users[item].email}</a>
