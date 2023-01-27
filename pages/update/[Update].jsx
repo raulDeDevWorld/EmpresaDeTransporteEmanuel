@@ -125,7 +125,7 @@ useEffect(() => {
                     </label>
                     <label>
                         ID:
-                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].id}`} defaultValue={`${userDB.forms[query].id}`} />
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].id}`} value={`${userDB.forms[query].id}`} />
                     </label>
                     <label>
                         Autorizado por:
