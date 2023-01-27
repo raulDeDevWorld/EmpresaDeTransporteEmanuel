@@ -306,7 +306,7 @@ function Users() {
             </main>}
             {mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${itemSelect.toUpperCase()}`}></Modal>}
             {mode == 'papelera' && <Modal mode={mode} click={x} confirm={papeleraConfirm} text={`Estas por restaurar a: ${itemSelect.toUpperCase()}`}></Modal>}
-            {mode == 'autor' && <Modal mode={mode} click={x} confirm={x} text={userDB.users[itemSelect] ? <span>Este formulario fue llenado por: <br />   userDB.users[itemSelect].email</span> : 'El usuario que creo este formulario ha sido Eliminado'}></Modal>}
+            {mode == 'autor' && <Modal mode={mode} click={x} confirm={x} text={userDB.users[itemSelect] ? <span>Este formulario fue llenado por: <br />   {userDB.users[itemSelect].email}</span> : 'El usuario que creo este formulario ha sido Eliminado'}></Modal>}
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
             {success == 'N/A' && <Error>Su Cuenta No Esta Verificada</Error>}
