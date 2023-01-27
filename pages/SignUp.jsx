@@ -52,7 +52,7 @@ function Login() {
                     </label>
                     <div className={style.buttonsContainer}>
                         <Button style='buttonPrimary' click={signUpWithEmailAndPassword}>Registrarme</Button>
-                        <Button style='buttonPrimary' click={signUpWithGoogle}>Continuar con Google</Button>
+                        {/* <Button style='buttonPrimary' click={signUpWithGoogle}>Continuar con Google</Button> */}
                     </div>
                     <div className={style.linkForm}>Ya tienes una cuenta? <Link href="/" ><a className={style.link}>Iniciar Sesion</a></Link></div>
                 </form>
