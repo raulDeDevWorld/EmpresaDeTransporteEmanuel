@@ -58,7 +58,7 @@ function Users() {
             return
         }
         if (userDB && userDB.users[user.uid].rol == 'Admin' && userDB.forms[itemSelect].state == false) {
-            removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
+            // removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
             removeData(`forms/${itemSelect}`, setUserData, setUserSuccess)
             console.log('eli');
             getData(`/`, setUserData)
@@ -123,7 +123,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Restore.svg" width="25" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -138,7 +138,7 @@ function Users() {
                                     </Link>
 
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Restore.svg" width="25" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -159,7 +159,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
                                     </Link>
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item.id].state == false
                                             ? <Image src="/Restore.svg" width="25" height="25" alt="User" onClick={() => papelera(item.id)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
@@ -177,7 +177,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item.id].state == false
                                             ? <Image src="/Restore.svg" width="25" height="25" alt="User" onClick={() => papelera(item.id)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
@@ -212,7 +212,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -227,7 +227,7 @@ function Users() {
                                     </Link>
 
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(userDB.forms[item].autor)}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -248,7 +248,7 @@ function Users() {
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
                                     </Link>
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item.id].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
@@ -260,13 +260,13 @@ function Users() {
 
 
 
-                            if (filter == '' && userDB.users[user.uid].forms[item.id]  && userDB.forms[item.id].state == true) {
+                            if (filter == '' && userDB.users[user.uid].forms[item.id] && userDB.forms[item.id].state == true) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item.id}`} >
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
                                     </Link>
                                     <div className={style.items}>
-                                        <span className={style.rol} onClick={()=>autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        <span className={style.rol} onClick={() => autor(item.autor)}>{new Date(userDB.forms[item.id].date).getDate()}/{new Date(userDB.forms[item.id].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
                                         {userDB.forms[item.id].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item.id)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item.id)} />}
@@ -276,18 +276,6 @@ function Users() {
                             }
                         }
                         )}
-
-
-
-
-
-
-
-
-
-
-
-
 
                     </ul>
                 }
@@ -302,11 +290,11 @@ function Users() {
                     </ul>
                 }
 
-                <button className={style.add} onClick={push}>+</button> 
+                <button className={style.add} onClick={push}>+</button>
             </main>}
             {mode == 'remove' && <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${itemSelect.toUpperCase()}`}></Modal>}
             {mode == 'papelera' && <Modal mode={mode} click={x} confirm={papeleraConfirm} text={`Estas por restaurar a: ${itemSelect.toUpperCase()}`}></Modal>}
-            {mode == 'autor' && <Modal mode={mode} click={x} confirm={x} text={<span>Este formulario fue llenado por: <br />  {userDB.users[itemSelect].email}</span>}></Modal>}
+            {mode == 'autor' && <Modal mode={mode} click={x} confirm={x} text={userDB.users[itemSelect] ? <span>Este formulario fue llenado por: <br />   userDB.users[itemSelect].email</span>: 'El usuario que creo este formulario ha sido Eliminado'}></Modal>}
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
             {success == 'N/A' && <Error>Su Cuenta No Esta Verificada</Error>}
