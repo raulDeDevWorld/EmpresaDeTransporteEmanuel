@@ -36,22 +36,15 @@ function Users() {
         setItemSelect(item)
     }
     function removeConfirm() {
-        console.log(userDB.forms[itemSelect].state == true);
 
-        if (userDB.forms[itemSelect].state == true) {
-
-            // writeUserData(`users/${user.uid}/forms`, { [itemSelect]: false }, setUserSuccess)
-            writeUserData(`forms/${itemSelect}`, { state: false }, setUserSuccess)
-            getData(`/`, setUserData)
-            console.log('pape');
-
-            return
-        }
-        if (userDB && userDB.users[user.uid].rol == 'Admin' && userDB.forms[itemSelect].state == false) {
-            removeData(`users/${user.uid}/forms`, setUserData, setUserSuccess)
-            removeData(`forms/${itemSelect}`, setUserData, setUserSuccess)
+     
+        if (userDB && userDB.users[user.uid] && userDB.users[user.uid].rol == 'Admin') {
+            setItemSelect('')
+            removeData(`users/${itemSelect}/`, setUserData, setUserSuccess)
             console.log('eli');
             getData(`/`, setUserData)
+            console.log('admin');
+
         }
     }
 

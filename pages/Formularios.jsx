@@ -199,7 +199,7 @@ function Users() {
 
 
                         {filterInput == 'Alfabetico' && userDB.users && userDB.users[user.uid].forms && Object.keys(userDB.users[user.uid].forms).map((item, i) => {
-                            if (userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa.includes(filter)) {
+                            if (userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa.includes(filter) && userDB.forms[item].state == true) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item}`} >
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
@@ -213,14 +213,14 @@ function Users() {
                                     </div>
                                 </div>
                             }
-                            if (filter == '' && userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa) {
+                            if (filter == '' && userDB.forms[item] && userDB.forms[item].placa && userDB.forms[item].placa && userDB.forms[item].state == true) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item}`} >
                                         <a className={` ${userDB.forms[item].state == false ? style.papelera : style.link}`}>{item}</a>
                                     </Link>
 
                                     <div className={style.items}>
-                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item.id].date).getMonth() + 1}` : new Date(userDB.forms[item.id].date).getMonth() + 1}</span>
+                                        <span className={style.rol}>{new Date(userDB.forms[item].date).getDate()}/{new Date(userDB.forms[item].date).getMonth() + 1 < 10 ? `0${new Date(userDB.forms[item].date).getMonth() + 1}` : new Date(userDB.forms[item].date).getMonth() + 1}</span>
                                         {userDB.forms[item].state == false
                                             ? <Image src="/Config.svg" width="24" height="25" alt="User" onClick={() => papelera(item)} />
                                             : <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />}
@@ -235,7 +235,7 @@ function Users() {
                         {filterInput == 'Fecha' && forms.length > 0 && forms.map((item, i) => {
 
 
-                            if (filter !== '' && userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa && userDB.users[user.uid].forms[item.id] && userDB.forms[item.id].placa.includes(filter)) {
+                            if (filter !== '' && userDB.forms && userDB.forms[item.id] && userDB.forms[item.id].placa && userDB.users[user.uid].forms[item.id] && userDB.forms[item.id].placa.includes(filter) && userDB.forms[item].state == true) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item.id}`} >
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
@@ -253,7 +253,7 @@ function Users() {
 
 
 
-                            if (filter == '' && userDB.users[user.uid].forms[item.id]) {
+                            if (filter == '' && userDB.users[user.uid].forms[item.id] && userDB.forms[item].state == true) {
                                 return <div className={style.items} key={i}>
                                     <Link href="validator/[User]" as={`validator/${item.id}`} >
                                         <a className={` ${userDB.forms[item.id].state == false ? style.papelera : style.link}`}>{item.id}</a>
@@ -267,10 +267,6 @@ function Users() {
                                     </div>
                                 </div>
                             }
-
-
-
-
                         }
                         )}
 

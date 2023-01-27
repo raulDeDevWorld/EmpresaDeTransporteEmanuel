@@ -11,7 +11,7 @@ import style from '../../styles/AddUser.module.css'
 
 function AddUser() {
 
-    const {user, userDB, specificData, setUserSpecificData, setUserSuccess, success } = useUser()
+    const { user, userDB, specificData, setUserSpecificData, setUserSuccess, success } = useUser()
     const router = useRouter()
 
     function save(e) {
@@ -35,22 +35,24 @@ function AddUser() {
             sustancia: e.target.form[15].value.length > 0 ? e.target.form[15].value : specificData.sustancia,
             id: e.target.form[16].value.length > 0 ? e.target.form[16].value : specificData.id,
             autorizadoPor: e.target.form[17].value.length > 0 ? e.target.form[17].value : specificData.autorizadoPor,
-            date: new Date()
+            date: new Date(),
+            autor: user.uid
 
         }
         writeUserData(`forms/${router.query.Update}`, object, setUserSuccess)
     }
 
-    useEffect(() => {
-        console.log('hello world')
-        let query = router.query.Update
-        userDB && setUserSpecificData(userDB.forms[query])
-    }, [specificData]);
+const query = router.query.Update
+
+useEffect(() => {
+    const query = router.query.Update
+    getSpecificData(`forms/${query}`, setUserSpecificData)
+}, []);
 
     return (
 
         <div className={style.container}>
-            {specificData && <main className={style.main}>
+            {userDB && userDB.forms && specificData && <main className={style.main}>
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Administrador</h4>
@@ -59,75 +61,75 @@ function AddUser() {
                     <h4 className={style.subtitle}>AÑADIR NUEVO USUARIO</h4>
                     <label>
                         N° de preimpreso:
-                        <input className={style.input} type="text" placeholder={`${specificData.preimpreso}`} defaultValue={`${specificData.preimpreso}`} />
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].preimpreso}`} defaultValue={`${userDB.forms[query].preimpreso}`} />
                     </label>
                     <label>
                         N° de trámite:
-                        <input className={style.input} type="text" placeholder={`${specificData.tramite}`} defaultValue={`${specificData.tramite}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].tramite}`} defaultValue={`${userDB.forms[query].tramite}`} />
                     </label>
                     <label>
                         Estado:
-                        <input className={style.input} type="text" placeholder={`${specificData.estado}`} defaultValue={`${specificData.estado}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].estado}`} defaultValue={`${userDB.forms[query].estado}`} />
                     </label>
                     <label>
                         Vigencia:
-                        <input className={style.input} type="text" placeholder={`${specificData.vigencia}`} defaultValue={`${specificData.vigencia}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].vigencia}`} defaultValue={`${userDB.forms[query].vigencia}`} />
                     </label>
                     <label>
                         Traspaso ó N° RA/ACL:
-                        <input className={style.input} type="text" placeholder={`${specificData.traspaso}`} defaultValue={`${specificData.traspaso}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].traspaso}`} defaultValue={`${userDB.forms[query].traspaso}`} />
                     </label>
                     <label>
                         Movilidad Placa:
-                        <input className={style.input} type="text" placeholder={`${specificData.placa}`} defaultValue={`${specificData.placa}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].placa}`} defaultValue={`${userDB.forms[query].placa}`} />
                     </label>
                     <label>
                         Porteador:
-                        <input className={style.input} type="text" placeholder={`${specificData.porteador}`} defaultValue={`${specificData.porteador}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].porteador}`} defaultValue={`${userDB.forms[query].porteador}`} />
                     </label>
                     <label>
                         Fecha de registro en sistema:
-                        <input className={style.input} type="text" placeholder={`${specificData.fecha}`} defaultValue={`${specificData.fecha}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].fecha}`} defaultValue={`${userDB.forms[query].fecha}`} />
                     </label>
                     <label>
                         Autoriza al registro:
-                        <input className={style.input} type="text" placeholder={`${specificData.autoriza}`} defaultValue={`${specificData.autoriza}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].autoriza}`} defaultValue={`${userDB.forms[query].autoriza}`} />
                     </label>
                     <label>
                         Solicitado por:
-                        <input className={style.input} type="text" placeholder={`${specificData.solicitado}`} defaultValue={`${specificData.solicitado}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].solicitado}`} defaultValue={`${userDB.forms[query].solicitado}`} />
                     </label>
                     <label>
                         Comprar a su proveedor:
-                        <input className={style.input} type="text" placeholder={`${specificData.proveedor}`} defaultValue={`${specificData.proveedor}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].proveedor}`} defaultValue={`${userDB.forms[query].proveedor}`} />
                     </label>
                     <label>
                         Para ser utilizada en:
-                        <input className={style.input} type="text" placeholder={`${specificData.uso}`} defaultValue={`${specificData.uso}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].uso}`} defaultValue={`${userDB.forms[query].uso}`} />
                     </label>
                     <label>
                         Origen del transporte:
-                        <input className={style.input} type="text" placeholder={`${specificData.origen}`} defaultValue={`${specificData.origen}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].origen}`} defaultValue={`${userDB.forms[query].origen}`} />
                     </label>
                     <label>
                         Destino del transporte:
-                        <input className={style.input} type="text" placeholder={`${specificData.destino}`} defaultValue={`${specificData.destino}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].destino}`} defaultValue={`${userDB.forms[query].destino}`} />
                     </label>
                     <label>
                         Ruta del transporte:
-                        <input className={style.input} type="text" placeholder={`${specificData.ruta}`} defaultValue={`${specificData.ruta}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].ruta}`} defaultValue={`${userDB.forms[query].ruta}`} />
                     </label>
                     <label>
                         Sustancia:
-                        <input className={style.input} type="text" placeholder={`${specificData.sustancia}`} defaultValue={`${specificData.sustancia}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].sustancia}`} defaultValue={`${userDB.forms[query].sustancia}`} />
                     </label>
                     <label>
                         ID:
-                        <input className={style.input} type="text" placeholder={`${specificData.id}`} defaultValue={`${specificData.id}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].id}`} defaultValue={`${userDB.forms[query].id}`} />
                     </label>
                     <label>
                         Autorizado por:
-                        <input className={style.input} type="text" placeholder={`${specificData.autorizadoPor}`} defaultValue={`${specificData.autorizadoPor}`}/>
+                        <input className={style.input} type="text" placeholder={`${userDB.forms[query].autorizadoPor}`} defaultValue={`${userDB.forms[query].autorizadoPor}`} />
                     </label>
                     <div className={style.buttonsContainer}>
                         <Button style='buttonPrimary' click={save}>Guardar</Button>

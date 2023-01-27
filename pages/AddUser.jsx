@@ -47,14 +47,14 @@ function AddUser() {
             id: e.target.form[16].value,
             autorizadoPor: e.target.form[17].value,
             state: true,
-            date: new Date()
+            date: new Date(),
+            autor: user.uid
         }
         writeUserData(`/forms/${object.id}`, object, setUserSuccess)
         writeUserData(`users/${user.uid}/forms`, { [object.id]: true}, setUserSuccess)
 
     }
 
-    console.log(user.uid)
     return (
 
         <div className={style.container}>
