@@ -36,7 +36,8 @@ function AddUser() {
             id: e.target.form[16].value.length > 0 ? e.target.form[16].value : specificData.id,
             autorizadoPor: e.target.form[17].value.length > 0 ? e.target.form[17].value : specificData.autorizadoPor,
             date: new Date(),
-            autor: user.uid
+            autor: user.uid,
+            state: true
 
         }
         writeUserData(`forms/${router.query.Update}`, object, setUserSuccess)
