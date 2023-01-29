@@ -37,14 +37,13 @@ function AddUser() {
             autorizadoPor: e.target.form[17].value.length > 0 ? e.target.form[17].value : specificData.autorizadoPor,
             date: new Date(),
             autor: user.uid,
-            state: true
+            state: specificData.state
 
         }
         writeUserData(`forms/${router.query.Update}`, object, setUserSuccess)
     }
 
 const query = router.query.Update
-
 useEffect(() => {
     const query = router.query.Update
     getSpecificData(`forms/${query}`, setUserSpecificData)
