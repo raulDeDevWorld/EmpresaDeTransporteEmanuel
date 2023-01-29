@@ -65,6 +65,8 @@
 .link {
   text-decoration: none;
   color: white;
+  word-break: break-all;
+width: 60%;
 }
 
 .logout {
@@ -113,12 +115,15 @@
 
 .papelera {
   color: rgb(144, 144, 144);
+  word-break: break-all;
+  width: 60%;
+
 }
 
 .rol {
   cursor: pointer;
   display: block;
-  width: 50px;
+  width: 60px;
   text-align: center;
   margin-right: 10px;
   color: white
