@@ -44,7 +44,7 @@ function AddUser() {
             destino: e.target.form[13].value,
             ruta: e.target.form[14].value,
             sustancia: e.target.form[15].value,
-            id: e.target.form[16].value,
+            id: e.target.form[16].value.trim(),
             autorizadoPor: e.target.form[17].value,
             state: true,
             date: new Date(),

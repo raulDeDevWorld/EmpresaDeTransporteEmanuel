@@ -33,7 +33,7 @@ function AddUser() {
             destino: e.target.form[13].value.length > 0 ? e.target.form[13].value : specificData.destino,
             ruta: e.target.form[14].value.length > 0 ? e.target.form[14].value : specificData.ruta,
             sustancia: e.target.form[15].value.length > 0 ? e.target.form[15].value : specificData.sustancia,
-            id: e.target.form[16].value.length > 0 ? e.target.form[16].value : specificData.id,
+            id: e.target.form[16].value.length > 0 ? e.target.form[16].value.trim() : specificData.idtrim(),
             autorizadoPor: e.target.form[17].value.length > 0 ? e.target.form[17].value : specificData.autorizadoPor,
             date: new Date(),
             autor: user.uid,
